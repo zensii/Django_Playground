@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from DJ_URLs_and_Views.department.models import Department
 
@@ -26,3 +26,9 @@ def view_with_id_and_slug(request, id, slug):
 def show_archive(request, archive_year):
     return HttpResponse(f"<h1>The year is {archive_year}</h1>")
 
+def redirect_to_view(request):
+
+    # redirect('http://localhost:8000/numbers/') this breaks the abstraction
+    # redirect(index) breaks single responsibility if view is from another app
+    # return redirect('home') # this is the best option. We need to give the view a name and refer to it
+    return redirect('numbers', pk=2) # can be used with views that accept parameters as well
