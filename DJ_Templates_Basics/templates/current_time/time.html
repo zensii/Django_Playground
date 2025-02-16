@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Current Time</title>
+    <script>
+    function updateTime() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            document.getElementById("time").textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        setInterval(updateTime, 1000); // Update every second
+        window.onload = updateTime; // Update immediately on page load
+</script>
+    <style>
+        .btn {
+            display: inline-block;
+            background: #ff6600;
+            color: white;
+            padding: 12px 24px;
+            font-size: 1.2rem;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.3s;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Current Time: <span id="time"></span></h1>
+<a href="{% url 'home_page' %}" class="btn" >Home</a>
+
+</body>
+</html>
