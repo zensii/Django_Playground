@@ -11,6 +11,28 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+
+def load_dotenv():
+    # Resolve project root path dynamically
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # Two levels up from settings.py
+    env_path = os.path.join(project_root, '.env')
+
+    if not os.path.exists(env_path):
+        raise FileNotFoundError(f".env file not found at {env_path}")
+
+    with open(env_path) as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith('#'):
+                key, value = line.split('=', 1)
+                os.environ[key.strip()] = value.strip()
+# Load .env file variables
+load_dotenv()
+
+DB_PASS = os.getenv('DB_PASS')
+DB_ADDRESS = os.getenv('DB_ADDRESS')
+DB_USER = os.getenv('DB_USER')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,6 +59,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'Petstagram.photos.apps.PhotosConfig',
+    'Petstagram.pets.apps.PetsConfig',
+    'Petstagram.accounts.apps.AccountsConfig',
+    'Petstagram.common.apps.CommonConfig'
 ]
 
 MIDDLEWARE = [
@@ -75,9 +101,13 @@ WSGI_APPLICATION = 'Petstagram.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "petstagram",
+        "USER": DB_USER,
+        "PASSWORD": DB_PASS,
+        "HOST": DB_ADDRESS,
+        "PORT": "5432",
     }
 }
 
@@ -117,6 +147,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = (
+    BASE_DIR / 'static',
+)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
