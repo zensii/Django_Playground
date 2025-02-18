@@ -151,6 +151,11 @@ STATICFILES_DIRS = (
     BASE_DIR / 'static',
 )
 
+# Media file settings to show local media from the admin panel
+MEDIA_URL = ""
+MEDIA_ROOT = os.path.join(BASE_DIR, "mediafiles")
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 

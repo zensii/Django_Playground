@@ -8,3 +8,4 @@ from Petstagram.pets.models import Pet
 class PetAdmin(admin.ModelAdmin):
 
     list_display = ('name', 'slug')
+    readonly_fields = ("slug",)
