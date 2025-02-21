@@ -20,5 +20,6 @@ from django.urls import path, include
 urlpatterns = [
     #    path('admin/', admin.site.urls),
     path('', include('DJ_Templates_Basics.current_time.urls')),
-    path('forum/', include('DJ_Templates_Basics.posts.urls'))
+    path('forum/', include('DJ_Templates_Basics.posts.urls')),
+    path('stock/', include('DJ_Templates_Basics.stock_data.urls'))
 ]

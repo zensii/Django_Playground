@@ -11,3 +11,7 @@ def welcome_page(request):
 def index(request):
 
     return render(request, 'current_time/time.html')
+
+def test(request):
+
+    return render(request, 'current_time/test.html')

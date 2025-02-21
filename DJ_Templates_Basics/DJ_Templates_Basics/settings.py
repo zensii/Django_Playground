@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'DJ_Templates_Basics.current_time.apps.CurrentTimeConfig',
-    'DJ_Templates_Basics.posts.apps.ForumAppConfig'
+    'DJ_Templates_Basics.posts.apps.ForumAppConfig',
+    'DJ_Templates_Basics.stock_data.apps.StockDataConfig'
 
 ]
 
