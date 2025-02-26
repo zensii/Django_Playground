@@ -5,25 +5,21 @@ from datetime import datetime
 
 from django.http import HttpResponse
 
+from DJ_Templates_Basics.posts.forms import PersonForm
 
 
 def index(request):
 
+    form = PersonForm(request.POST or None)  # here we say : we get a post request , we get alldata from the request and crete a form with the data. If no data exists we get an empty form
+    if request.method == 'POST':
+        print(request.POST['person_name'])
+
+    if form.is_valid():  # validates the form and returns errors and clean_data
+        print(form.cleaned_data['person_name'])
+
+
     context = {
-        "current_time": datetime.now(),
-        "person": {
-            "age": 20,
-            "height": 190,
-        },
-        "ids": ["62348764", "fwhj827634", "42y3tyr"],
-        "some_text": "Hello",
-        "users": [
-            "pesho",
-            "ivan",
-            "stamat",
-            "saria",
-            "magdalena"
-        ]
+        'my_form': form
     }
 
     return render(request, 'posts/base.html', context)

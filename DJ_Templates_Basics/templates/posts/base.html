@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forum Posts</title>
@@ -11,10 +12,44 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include jQuery UI CSS from a CDN -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- Include jQuery UI JS from a CDN -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 </head>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+        // Initialize the datepicker on elements with the 'datepicker' class
+        $('.datepicker').datepicker({
+            dateFormat: 'yy-mm-dd',  // Optional: set the date format
+            changeMonth: true,        // Allow the user to change the month
+            changeYear: true          // Allow the user to change the year
+        });
+    });
+    </script>
+
+
 <body>
     {% include 'posts/nav.html' %}
     <h1>Hello User</h1>
+    <form action="/forum/posts/" method="post">
+        {{ my_form }}
+        {{ my_form.errors }}
+        {% csrf_token %}
+        <button>Submit</button>
+    </form>
+
+{#    <form action="/forum/posts/ " method="post">#}
+{#        {% csrf_token %}#}
+{#        <input type="text" name="person_name">#}
+{#        <input type="number" name="age">#}
+{#        <input type="password" name="user_pass">#}
+{#        <button type="submit">Submit</button>#}
+{#        <input type="submit" value="Input-Submit"/>  {#this is more modern#}
+{#    </form>#}
 </body>
     <script src='https://unpkg.com/akar-icons-fonts'></script>
 </html>
