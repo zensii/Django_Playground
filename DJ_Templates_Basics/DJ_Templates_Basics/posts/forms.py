@@ -76,3 +76,14 @@ class PersonForm(forms.Form):
         if data == '':  # Ensuring a valid selection
             raise ValidationError("Please select a valid status.")
         return data
+
+class SearchForm(forms.Form):
+
+    query = forms.CharField(
+        label='',
+        required=False,
+        max_length=100,
+        widget=forms.TextInput(attrs={
+            'placeholder': 'Search for a post'
+        })
+    )
