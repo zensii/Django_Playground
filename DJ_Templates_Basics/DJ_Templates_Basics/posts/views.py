@@ -6,7 +6,7 @@ from datetime import datetime
 from django.http import HttpResponse
 
 from DJ_Templates_Basics.posts.forms import PersonForm, SearchForm
-from DJ_Templates_Basics.posts.model_forms import PostForm, PostDeleteForm
+from DJ_Templates_Basics.posts.model_forms import PostForm, PostDeleteForm, PostEditForm
 from DJ_Templates_Basics.posts.models import Post
 
 
@@ -58,13 +58,20 @@ def dashboard(request):
 
     return render(request, 'posts/dashboard.html', context)
 
+def details_page(request, pk:int):
+    post = Post.objects.get(pk=pk)
+
+    context = {
+        'post': post
+    }
+    return render(request, 'posts/details-post.html', context)
 
 def select_post_to_delete(request):
     posts = Post.objects.all()
 
     if request.method == 'POST':
-        selected_post_id = request.POST.get('post_id')
-        return redirect('delete_post', pk = selected_post_id)
+        selected_post_id = int(request.POST.get('post_id'))
+        return redirect('delete-post', pk = selected_post_id)
 
     return render(request, 'posts/select_delete.html', {'posts':  posts})
 def delete_post(request, pk: int):
@@ -83,11 +90,22 @@ def delete_post(request, pk: int):
 
     return render(request, 'posts/delete_post.html', context)
 
+def edit_post(request, pk: int):
 
-def details_page(request, pk:int):
-    post = Post.objects.all()
+    post = Post.objects.get(pk = pk)
+
+    if request.method == 'POST':
+        form = PostEditForm(request.POST, instance=post)
+
+        if form.is_valid():
+            form.save()
+            return redirect('dash')
+    else:
+        form =  PostEditForm(instance=post)
+
     context = {
-        'posts': post,
+        'form': form,
+        'post': post,
     }
-    return render(request, 'posts/details-post.html', context)
 
+    return render(request, 'posts/edit-post.html', context)

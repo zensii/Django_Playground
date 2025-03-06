@@ -4,14 +4,14 @@
         {{ block.super }}
             <style>
         h1 {
-            color: darkred;
+            color: aquamarine;
         }
     </style>
     {% endblock %}
 
 {% block content %}
-    <h1>Delete Post</h1>
-    <form action="{% url 'delete-post' post.pk %}" method="post">
+    <h1>Edit Post</h1>
+    <form action="{% url 'edit-post' post.pk %}" method="post">
         {{ form }}
         {% csrf_token %}
         <button class="button-9">Submit</button>
