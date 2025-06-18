@@ -1,0 +1,43 @@
+{# TODO prep the base.html with navbar and footer taken from the other pages #}
+
+{% load static %} {# TODO loads static files #}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>My Music App</title>
+    <!-- Static Load -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+    {# TODO replace direct link with static #}
+</head>
+
+<body>
+<div id="box">
+    <!-- Navigation Bar -->
+    <header>
+        <nav>
+            <img src="{% static 'images/headphones.png' %}" alt="headphones"/> {# TODO also for the images #}
+            <a href="{% url 'homepage' %}">Home</a>
+            <ul></ul>
+            <ul>
+                <!--Only for user with created profile-->
+                <li><a href="{% url 'albums:add_album' %}">Create Album</a></li>
+                <li><a href="{% url 'profiles:profile_details' %}">Profile</a></li>
+            </ul>
+        </nav>
+
+    </header>
+    <!-- End Navigation Bar -->
+
+    {% block content %}
+    {% endblock %}
+
+    <!-- Footer -->
+    <footer>
+        <div>&copy;SoftUni Team 2024. All rights reserved.</div>
+    </footer>
+    <!-- End Footer -->
+</div>
+</body>
+</html>
