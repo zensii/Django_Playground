@@ -8,17 +8,6 @@ from Exam_prep1.profiles.models import Profile
 
 class ProfileBaseForm(forms.ModelForm):
 
-    # username = forms.CharField(
-    #         widget=forms.TextInput(attrs={'placeholder': 'Username'}),
-    #     )
-    # email = forms.EmailField(
-    #     widget=forms.TextInput(attrs={'placeholder': 'Email'}),
-    # )
-    # age = forms.IntegerField(
-    #     widget=forms.TextInput(attrs={'placeholder': 'Age'}),
-    # )
-
-
     class Meta:
         model = Profile
         fields = '__all__'
